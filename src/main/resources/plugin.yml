@@ -2,19 +2,9 @@ main: ${PACKAGE}.${NAME}
 name: ${NAME}
 version: "${VERSION}"
 api-version: "1.16"
-author: AUTHOR
-description: DESCRIPTION
+author: levkopo
+description: A plugin for test configuration cisco ios
 commands:
-  ex:
-    description: Base command for EXAMPLE
-    usage: "For a list of commands, type /ex help"
-    aliases: example
-permissions:
-  example.test:
-    description: DESCRIPTION
-    default: true
-  example.*:
-    description: Grants all other permissions
-    default: false
-    children:
-      example.test: true
+  get_unique:
+    description: Get unique object
+    usage: "For a list of commands, type /get_unique help"

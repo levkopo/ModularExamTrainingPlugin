@@ -1,4 +1,4 @@
-package com.crimsonwarpedcraft.exampleplugin;
+package ru.levkopo.plugins.mccisco;
 
 import org.junit.jupiter.api.Test;
 
@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author Copyright (c) Levi Muniz. All Rights Reserved.
  */
-public class ExamplePluginTest {
+public class McCiscoPluginTest {
 
   @Test
   public void onEnable() {
