@@ -5,6 +5,9 @@ api-version: "1.16"
 author: levkopo
 description: A plugin for test configuration cisco ios
 commands:
-  get_unique:
-    description: Get unique object
-    usage: "For a list of commands, type /get_unique help"
+  give_unique_item:
+    description: Give unique item for player
+  cancel_task:
+    description: Cancel current task
+  start_task:
+    description: Start task for player

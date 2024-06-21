@@ -4,7 +4,7 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
-import ru.levkopo.plugins.mccisco.McCiscoPlugin;
+import ru.levkopo.plugins.mccisco.ModularExamTrainingPlugin;
 import ru.levkopo.plugins.mccisco.tasks.result.TaskResult;
 
 import static net.kyori.adventure.text.Component.text;
@@ -50,7 +50,7 @@ public abstract class Task  {
                 public void run() {
                     result.run(player);
                 }
-            }.runTask(McCiscoPlugin.instance);
+            }.runTask(ModularExamTrainingPlugin.instance);
         }
 
         TasksProvider.stopTask();

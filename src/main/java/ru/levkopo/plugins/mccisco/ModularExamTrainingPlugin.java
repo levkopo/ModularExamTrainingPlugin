@@ -12,14 +12,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import ru.levkopo.plugins.mccisco.tasks.CiscoInterfaceTask;
-import ru.levkopo.plugins.mccisco.tasks.Task;
+import ru.levkopo.plugins.mccisco.commands.CancelTaskCommand;
+import ru.levkopo.plugins.mccisco.commands.GiveUniqueItemCommand;
+import ru.levkopo.plugins.mccisco.commands.StartTaskCommand;
 import ru.levkopo.plugins.mccisco.tasks.TasksProvider;
-import ru.levkopo.plugins.mccisco.tasks.result.TimeUpgradeWorldBorder;
-import ru.levkopo.plugins.mccisco.tasks.result.UpgradeWorldBorder;
+import ru.levkopo.plugins.mccisco.utils.RandomUtil;
 
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -27,8 +25,6 @@ import java.util.Objects;
 import static net.kyori.adventure.text.Component.text;
 import static net.kyori.adventure.text.format.NamedTextColor.*;
 import static net.kyori.adventure.text.format.TextColor.color;
-import static ru.levkopo.plugins.mccisco.tasks.TasksProvider.startRandomTask;
-import static ru.levkopo.plugins.mccisco.tasks.TasksProvider.startTask;
 
 
 /**
@@ -36,9 +32,8 @@ import static ru.levkopo.plugins.mccisco.tasks.TasksProvider.startTask;
  *
  * @author Copyright (c) Levi Muniz. All Rights Reserved.
  */
-public class McCiscoPlugin extends JavaPlugin implements Listener, ChatRenderer {
-    public static McCiscoPlugin instance;
-    private static final SecureRandom random = new SecureRandom();
+public class ModularExamTrainingPlugin extends JavaPlugin implements Listener, ChatRenderer {
+    public static ModularExamTrainingPlugin instance;
 
     @Override
     public void onEnable() {
@@ -53,17 +48,21 @@ public class McCiscoPlugin extends JavaPlugin implements Listener, ChatRenderer 
                 return;
             }
 
-            TasksProvider.startRandomTask(players.get(random.nextInt(players.size())));
-        }, 0L, (long) (24000 * 1.5));
+            TasksProvider.startRandomTask(RandomUtil.fromList(players));
+        }, 0L, 24000);
 
-        Objects.requireNonNull(getCommand("get_unique")).setExecutor(new GetUniqueCommand());
+        Objects.requireNonNull(getCommand("give_unique_item")).setExecutor(new GiveUniqueItemCommand());
+        Objects.requireNonNull(getCommand("cancel_task")).setExecutor(new CancelTaskCommand());
+        Objects.requireNonNull(getCommand("start_task")).setExecutor(new StartTaskCommand());
+
+
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onPlayerJoin(PlayerJoinEvent event) {
         event.joinMessage(
                 text("Добро пожаловать на ", RED)
-                        .append(text("Cisco MC Server!", BLUE))
+                        .append(text("Modular exam Server!", BLUE))
         );
     }
 

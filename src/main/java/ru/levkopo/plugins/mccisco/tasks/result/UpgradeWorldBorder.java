@@ -4,7 +4,7 @@ import org.bukkit.WorldBorder;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class UpgradeWorldBorder extends TaskResult{
+public class UpgradeWorldBorder extends TaskResult {
     public final double size;
 
     public UpgradeWorldBorder(double size) {

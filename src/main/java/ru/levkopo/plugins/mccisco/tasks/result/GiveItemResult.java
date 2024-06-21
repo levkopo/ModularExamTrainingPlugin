@@ -45,7 +45,7 @@ public class GiveItemResult extends TaskResult {
 
     @Override
     public String getResultDescription(boolean negative) {
-        return negative ? "Уникальный предмет не достоин " : "Границы не уменьшились благодаря ";
+        return negative ? "Уникальный предмет не достоин " : "Уникальный предмет достоин ";
     }
 
     @Override

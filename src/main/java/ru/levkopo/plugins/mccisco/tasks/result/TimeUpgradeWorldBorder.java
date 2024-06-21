@@ -1,13 +1,11 @@
 package ru.levkopo.plugins.mccisco.tasks.result;
 
 import net.kyori.adventure.text.Component;
-import org.bukkit.Bukkit;
 import org.bukkit.WorldBorder;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.jetbrains.annotations.NotNull;
-import ru.levkopo.plugins.mccisco.McCiscoPlugin;
+import ru.levkopo.plugins.mccisco.ModularExamTrainingPlugin;
 
 import static net.kyori.adventure.text.format.NamedTextColor.RED;
 import static net.kyori.adventure.text.format.NamedTextColor.YELLOW;
@@ -33,7 +31,7 @@ public class TimeUpgradeWorldBorder extends TaskResult {
     @Override
     public void run(Player player) {
         BukkitScheduler scheduler = player.getServer().getScheduler();
-        scheduler.scheduleSyncDelayedTask(McCiscoPlugin.instance, () -> {
+        scheduler.scheduleSyncDelayedTask(ModularExamTrainingPlugin.instance, () -> {
             player.getServer().broadcast(Component.text("Ой, кажется мир сужается", RED));
 
             @NotNull WorldBorder worldBorder = player.getWorld().getWorldBorder();

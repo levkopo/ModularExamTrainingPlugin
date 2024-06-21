@@ -12,6 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import static net.kyori.adventure.text.Component.text;
 import static net.kyori.adventure.text.format.NamedTextColor.RED;
@@ -114,6 +115,8 @@ public class CiscoInterfaceTask extends Task {
         });
     }
 
+
+
     public Map<Context, Map<String, Object>> commands = Map.ofEntries(
             Map.entry(Context.NONE, Map.ofEntries(
                     Map.entry("enable", (TerminalFunction) (data) -> {
@@ -187,7 +190,7 @@ public class CiscoInterfaceTask extends Task {
                                 context = Context.CONFIGURE_LINE;
                                 return type;
                             })
-                    )),
+                    ).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (x, y) -> y, LinkedHashMap::new))),
                     Map.entry("interface", (TerminalFunction) (data) -> {
                         String interfaceName = String.join("", data).toLowerCase();
                         StringBuilder interfaceType = new StringBuilder();
@@ -243,22 +246,6 @@ public class CiscoInterfaceTask extends Task {
                                 enablePassword = data.getFirst();
                                 return true;
                             })
-                    ))
-            )),
-            Map.entry(Context.CONFIGURE_INTERFACE, Map.ofEntries(
-                    Map.entry("exit", (TerminalFunction) (data) -> {
-                        context = Context.CONFIGURE;
-                        return true;
-                    }),
-                    Map.entry("end", (TerminalFunction) (data) -> {
-                        context = Context.ENABLED;
-                        return true;
-                    }),
-                    Map.entry("no", Map.ofEntries(
-                            Map.entry("shutdown", (TerminalFunction) (data) -> {
-                                configureInterface.enabled = true;
-                                return true;
-                            })
                     )),
                     Map.entry("crypto", Map.ofEntries(
                             Map.entry("key", Map.ofEntries(
@@ -290,6 +277,22 @@ public class CiscoInterfaceTask extends Task {
                                             })
                                     ))
                             ))
+                    ))
+            )),
+            Map.entry(Context.CONFIGURE_INTERFACE, Map.ofEntries(
+                    Map.entry("exit", (TerminalFunction) (data) -> {
+                        context = Context.CONFIGURE;
+                        return true;
+                    }),
+                    Map.entry("end", (TerminalFunction) (data) -> {
+                        context = Context.ENABLED;
+                        return true;
+                    }),
+                    Map.entry("no", Map.ofEntries(
+                            Map.entry("shutdown", (TerminalFunction) (data) -> {
+                                configureInterface.enabled = true;
+                                return true;
+                            })
                     )),
                     Map.entry("shutdown", (TerminalFunction) (data) -> {
                         configureInterface.enabled = false;

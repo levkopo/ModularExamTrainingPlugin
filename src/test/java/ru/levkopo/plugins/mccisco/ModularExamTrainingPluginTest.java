@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author Copyright (c) Levi Muniz. All Rights Reserved.
  */
-public class McCiscoPluginTest {
+public class ModularExamTrainingPluginTest {
 
   @Test
   public void onEnable() {
